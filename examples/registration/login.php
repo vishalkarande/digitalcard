@@ -12,6 +12,30 @@ include('config.php');
 
 
 
+if(isset($_SESSION['email'])!=0)
+	{	
+	
+	$email=$_SESSION['email'];
+	
+	$dummy=mysqli_query($con,"SELECT form FROM `students_user` WHERE email='$email' ");
+	$ret= mysqli_fetch_array($dummy);
+	
+	if($ret['form']=="done"){
+		
+		header("Location: ../index.php");
+		
+		
+		
+	}else{
+		header('location:resume/personalinfo.php');
+		
+		
+	}
+	
+	
+	
+
+}else {
 
 if(isset($_POST['submit']))
 {
@@ -29,16 +53,20 @@ if(isset($_POST['submit']))
 
 	
 	if($pass==$ret['password']){
+			$_SESSION['email']=$_POST['email'];
+		echo '<script>alert("Welcome to Geeks for Geeks")</script>'; 
 		
+	
+		header("Location: resume/personalinfo.php");
 		
-		
-		
-			$extra="registration.php";//
+			/*$extra="resume/index.php";
 			$_SESSION['email']=$_POST['email'];
 			//$_SESSION['id']=$num['id'];
 			$host=$_SERVER['HTTP_HOST'];
 			$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-			header("location:http://$host$uri/$extra");
+			//header("location:http://$host$uri/$extra");
+			header("location:http://$host$uri/$extra");*/
+		
 			exit();
 		
 		
@@ -82,7 +110,7 @@ exit();
 
 
 
-
+}
 
 
 

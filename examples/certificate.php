@@ -39,7 +39,7 @@ else{
 
 
 $ret=mysqli_query($con,"select * from resume_certificate where email= '$user_email' ");
-												$row=mysqli_fetch_array($ret);
+											//	$row=mysqli_fetch_array($ret);
 
 
 
@@ -53,27 +53,39 @@ if(isset($_POST['submit']))
 	$link=$_POST['link'];
 	
 
-	$msg="abc";
-	
 	
 
-
-	  
-	
-	
 
 	
 	if($ret=mysqli_query($con,"UPDATE `resume_certificate` SET `certificate_domain`='$certificate_domain',`detail`='$project_detail',`link`='$link'  WHERE email='$user_email' ")){
-		
-		
-		
-		
-		
-
+		$msg="Updated";
+		echo "<script>alert('$msg');</script>"; 
+	header("Refresh:0");
 		
 	}
 
 }
+	
+		
+	
+	if(isset($_POST['delete']))
+{
+		$id=$_POST['id'];
+		$mes="Deleted";
+		
+	if($row=mysqli_query($con,"DELETE FROM `resume_certificate` WHERE id= '$id'")){
+		
+		
+	 echo "<script>alert('$mes');</script>"; 
+		header("Refresh:0");
+		
+	}
+	
+	
+
+}
+	
+	
 
 
 }
@@ -178,7 +190,7 @@ if(isset($_POST['submit']))
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">User Profile</a>
+            <a class="navbar-brand" href="#pablo"><?php echo $_SESSION['email']; ?></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -197,7 +209,7 @@ if(isset($_POST['submit']))
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Change password</a>
+                  <a class="dropdown-item" href="change_pass.php">Change password</a>
                   <a class="dropdown-item" href="logout.php">Logout</a>
                
                 </div>
@@ -215,19 +227,20 @@ if(isset($_POST['submit']))
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Edit Profile</h5>
+                <h5 class="title">Certificates</h5>
               </div>
               <div class="card-body">
 				  
 				  
 				  
-				  
+				 <?php  while($row=mysqli_fetch_array($ret)){ ?>
 				  
                 <form method="post">
                   <div class="row">
                     <div class="col-md-5 pr-1">
                       <div class="form-group">
                         <label>Certificate Domain</label>
+						    <input type="hidden" id="custId" name="id" value="<?php echo htmlentities($row['id']);?>">
                         <input type="text" name="certificate_domain" class="form-control" placeholder="Enter Domain" value="<?php echo htmlentities($row['certificate_domain']);    ?>">
                       </div>
                     </div>
@@ -241,7 +254,7 @@ if(isset($_POST['submit']))
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Certificate Detail</label>
-                        <textarea rows="4" cols="80" name="project_detail" class="form-control" placeholder="Write about you in less than 250 words" value="Mike"><?php echo htmlentities($row['detail']);    ?></textarea>
+                        <textarea rows="4" cols="80" name="project_detail" class="form-control" placeholder="Write about Certificate in less than 250 words" value="Mike"><?php echo htmlentities($row['detail']);    ?></textarea>
                       </div>
                     </div>
                   </div>
@@ -250,23 +263,27 @@ if(isset($_POST['submit']))
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Certificate Link</label>
-                        <textarea rows="4" cols="80" name="link" class="form-control" placeholder="Write about you in less than 250 words" value="Mike"><?php echo htmlentities($row['link']);    ?></textarea>
+                        <textarea rows="4" cols="80" name="link" class="form-control" placeholder="Add Link" value="Mike"><?php echo htmlentities($row['link']);    ?></textarea>
                       </div>
                     </div>
                   </div>
 					
 					
 					   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                       <div class="form-group">
                         
-                        <input name="submit" type="submit" value="Edit" >
+                        <input name="submit" type="submit" value="Update"  style="width:100px;margin:10px;height:35px; background-color:#ffb870;border-radius: 10px;" ><input name="delete" type="submit" value="Delete"  style="width:100px;margin:10px;height:35px; background-color:#ffb870;border-radius: 10px;" >
                       </div>
                     </div>
                   </div>
 					
 					
                 </form>
+				  
+				  <?php } ?>
+				  <br>
+				  	<a  href="add_certificate.php">	  <button class="active" name="add" style="width:100px;margin:10px;height:35px; background-color:#1d3c60;border-radius: 10px;float:right;color: white;">Add New</button></a>
               </div>
             </div>
           </div>

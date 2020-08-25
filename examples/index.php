@@ -29,6 +29,11 @@ if(strlen($_SESSION['email'])==0)
 header('location:registration/login.php');
 }
 else{
+	$user_email=$_SESSION['email'];
+	
+	$ret=mysqli_query($con,"select * from students_user where email= '$user_email' ");
+	$row=mysqli_fetch_array($ret);
+		
 	
 	$user_email=$_SESSION['email'];
 
@@ -54,29 +59,22 @@ if(isset($_POST['submit']))
 	//$productdescription=$_POST[''];
 	$pin=$_POST['pin'];
 	$personal=$_POST['personal'];
-	
-	
-
-
-
-
-
 
 
 	$msg="abc";
-	
-	
-	  
-	
-	
+
 
 	
 	if($ret=mysqli_query($con,"UPDATE resume_detail SET `first_name`='$first_name',`last_name`='$last',`phoneno.`='$phone',`address`='$address',`pincode`='$pin',`city`='$city
 ',`state`='$state',`personal_profile`='$personal'  WHERE email='$user_email' ")){
 		
+		$msg="Updated";
+		
+	 echo "<script type='text/javascript'>alert('$msg');</script>";
+	
 		
 		
-		
+		header("Refresh:0");
 		
 
 		
@@ -87,10 +85,10 @@ if(isset($_POST['submit']))
 
 
 
-
-
-
 }
+	
+	
+
 
 ?>
 
@@ -126,14 +124,7 @@ if(isset($_POST['submit']))
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
-      <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-       
-        </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-        
-        </a>
-      </div>
+      
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           <li class="active">
@@ -178,6 +169,13 @@ if(isset($_POST['submit']))
               <p>Certificates</p>
             </a>
           </li>
+			
+			<li >
+            <a href="./blue/resume.php">
+              <i class="now-ui-icons text_caps-small"></i>
+              <p>Generate Resume</p>
+            </a>
+          </li>
           
         </ul>
       </div>
@@ -194,7 +192,7 @@ if(isset($_POST['submit']))
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">User Profile</a>
+            <a class="navbar-brand" href="#pablo"><?php echo $_SESSION['email']; ?></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -213,7 +211,7 @@ if(isset($_POST['submit']))
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Change Password</a>
+                  <a class="dropdown-item" href="change_pass.php">Change Password</a>
                   <a class="dropdown-item" href="logout.php">Logout</a>
                    </div>
               </li>
@@ -327,7 +325,7 @@ if(isset($_POST['submit']))
                     <div class="col-md-3">
                       <div class="form-group">
                         
-                        <input name="submit" type="submit" value="Edit" >
+                        <input name="submit" class="btn btn-primary btn-round btn-lg" type="submit" value="Update" >
                       </div>
                     </div>
                   </div>
@@ -340,7 +338,7 @@ if(isset($_POST['submit']))
 			
 			
 			
-			
+			<!-- image
           <div class="col-md-4">
             <div class="card card-user">
               <div class="image">
@@ -365,37 +363,10 @@ if(isset($_POST['submit']))
               <hr>
             
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
-      <footer class="footer">
-        <div class=" container-fluid ">
-          <nav>
-            <ul>
-              <li>
-                <a >
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright" id="copyright">
-            &copy; <script>
-              document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-            </script>, Designed by <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by <a href="https://www.creative-tim.com" target="_blank"></a>.
-          </div>
-        </div>
-      </footer>
+ 
     </div>
   </div>
   <!--   Core JS Files   -->

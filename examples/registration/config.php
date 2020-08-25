@@ -6,7 +6,7 @@ define('DB_NAME', 'digital_card');
 $con = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
 // Check connection
 
-/*if($con){
+if($con){
 	
 
 	
@@ -19,15 +19,15 @@ $con = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
 	//$ret=mysqli_query($con,"INSERT INTO `resume_detail`(`email`, `first_name`) VALUES ('$email','$first_name'  ) ");
 		
 		
-		$dummy=mysqli_query($con,"SELECT * FROM `students_user` WHERE email='$email'");
+	//	$dummy=mysqli_query($con,"SELECT * FROM `students_user` WHERE email='$email'");
 	
 	
-	$row=mysqli_fetch_array($dummy);
+	//$row=mysqli_fetch_array($dummy);
 	
-		echo $row['email'];
+	//	echo $row['email'];
 
 		
-		
+	//	echo "connected";
 		
 
 												
@@ -45,7 +45,7 @@ $con = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME);
 	
 	
 	
-}*/
+}
 if (mysqli_connect_errno())
 {
  echo "Failed to connect to MySQL: " . mysqli_connect_error();

@@ -31,55 +31,53 @@ header('location:registration/login.php');
 }
 else{
 	
+
+	
 	$user_email=$_SESSION['email'];
 
+	
 
 
-
-$ret=mysqli_query($con,"select * from resume_work_exp where email= '$user_email' ");
+$ret=mysqli_query($con,"SELECT * FROM `resume_education` WHERE email= '$user_email' ");
 												$row=mysqli_fetch_array($ret);
-
-
-
 
 
 
 if(isset($_POST['submit']))
 {
-	$location=$_POST['company_location'];
-	$company_name=$_POST['company_name'];
-	$designation=$_POST['designation'];
-	$duration_year=$_POST['duration_year'];
-	$duration_month=$_POST['duration_month'];
-	$role=$_POST['role'];
-	//$productdescription=$_POST[''];
+
+					$x_name=$_POST['x_name'];
+				$x_board=$_POST['x_board'];
+				$x_percentage=$_POST['x_percentage'];
+				$x_completion=$_POST['x_completion'];
+				$xii_name=$_POST['xii_name'];
+				$xii_stream=$_POST['xii_stream'];
+				$xii_board=$_POST['xii_board'];
+				$xii_percentage=$_POST['xii_percentage'];
+				$xii_completion=$_POST['xii_completion'];
+				$be_stream=$_POST['be_stream'];
+				$college_name=$_POST['college_name'];
+				$uni_name=$_POST['uni_name'];
+				$be_percentage=$_POST['be_percentage'];
+				$be_completion=$_POST['be_completion'];
+				$me_stream=$_POST['me_stream'];
+				$me_name=$_POST['me_name'];
+				$me_uni_name=$_POST['me_uni_name'];
+				$me_percentage=$_POST['me_percentage'];
+				$me_completion=$_POST['me_completion'];
+
+
+
+
+
+				$msg="abc";
 	
-	
-	
 
-
-
-
-
-
-
-
-
-
-	$msg="abc";
-	
-	
-	  
-	
-	
 
 	
-	if($ret=mysqli_query($con,"UPDATE `resume_work_exp` SET `email`='$user_email',`company_name`='$company_name',`duration_year`='$duration_year',`designation`='$designation',`role`='$role',`duration_month`='$duration_month',`company_location`='$location' WHERE email='$user_email' ")){
+	if($ret=mysqli_query($con,"UPDATE `resume_education` SET `x_school`='$x_name',`x_board`='$x_board',`x_percentage`='$x_percentage',`x_year_complete`='$x_completion',`12_stream`='$xii_stream',`12_school`='$xii_name',`12_board`='$xii_board',`12_percentage`='$xii_percentage',`12_year_complete`='$xii_completion',`be_course`='$be_stream',`be_school`='$college_name',`be_board`='$uni_name',`be_percentage`='$be_percentage',`be_year_complete`='$be_completion',`me_course`='$me_stream',`me_school`='$me_name',`me_board`='$me_uni_name',`me_percentage`='$me_percentage',`me_year_complete`='$me_completion'  WHERE email='$user_email' ")){
 		
-		
-		
-		
-		
+		header("Refresh:0");
 		
 
 		
@@ -192,7 +190,7 @@ if(isset($_POST['submit']))
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">User Profile</a>
+            <a class="navbar-brand" href="#pablo"><?php echo $_SESSION['email']; ?></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -211,7 +209,7 @@ if(isset($_POST['submit']))
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Change Password</a>
+                  <a class="dropdown-item" href="change_pass.php">Change Password</a>
                   <a class="dropdown-item" href="logout.php">Logout</a>
                 
                 </div>
@@ -229,7 +227,7 @@ if(isset($_POST['submit']))
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Changes need to be done in this page</h5>
+                <h5 class="title">Education</h5>
               </div>
               <div class="card-body">
 				  
@@ -240,34 +238,41 @@ if(isset($_POST['submit']))
 				  
 				  
 				  
+				  
                 <form method="post">
-                  <div class="row">
-                    <div class="col-md-5 pr-1">
+                 
+		
+					
+					 <h4>10TH</h4>
+						 <div class="row">
+                
+                    <div class="col-md-6 px-1">
                       <div class="form-group">
-                        <label>Company Name</label>
-                        <input type="text" name="company_name" class="form-control"  placeholder="Company" value="<?php echo htmlentities($row['company_name']);    ?>">
+                        <label>Xth School Name</label>
+                        <input type="text" name="x_name" class="form-control" placeholder="" value="<?php echo htmlentities($row['x_school']);    ?>">
                       </div>
                     </div>
-                  
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Year of Complete</label>
+                        <input type="text" name="x_completion" class="form-control" placeholder="" value="<?php echo htmlentities($row['x_year_complete']);    ?>">
+                      </div>
+                    </div>
                   </div>
-					
-					
-					
-					
 					
 					
 					 <div class="row">
                 
                     <div class="col-md-6 px-1">
                       <div class="form-group">
-                        <label>Company Location</label>
-                        <input type="text" name="company_location" class="form-control" placeholder="First Name" value="<?php echo htmlentities($row['company_location']);    ?>">
+                        <label>Xth Board</label>
+                        <input type="text" name="x_board" class="form-control" placeholder="" value="<?php echo htmlentities($row['x_board']);    ?>">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Designation</label>
-                        <input type="text" name="designation" class="form-control" placeholder="Last Name" value="<?php echo htmlentities($row['designation']);    ?>">
+                        <label for="exampleInputEmail1">Xth Percentage</label>
+                        <input type="text" name="x_percentage" class="form-control" placeholder="" value="<?php echo htmlentities($row['x_percentage']);    ?>">
                       </div>
                     </div>
                   </div>
@@ -277,44 +282,196 @@ if(isset($_POST['submit']))
 					
 					
 					
+				
+                 
 					
-               
-                  <div class="row">
-                    <div class="col-md-4 pr-1">
+				
+				  
+				  <br>
+				  
+				 
+                 <h4>12TH/ Diploma</h4>
+						
+                <div class="row">
+                    <div class="col-md-5 pr-1">
                       <div class="form-group">
-                        <label>Working Year </label>
-                        <input type="text" name="duration_year" class="form-control" placeholder="City" value="<?php echo htmlentities($row['duration_year']);    ?>">
+                        <label>12th Stream</label>
+                        <input type="text" name="xii_stream" class="form-control"  placeholder="" value="<?php echo htmlentities($row['12_stream']);    ?>">
                       </div>
                     </div>
-                    <div class="col-md-4 px-1">
-                      <div class="form-group">
-                        <label>Working Month</label>
-                        <input type="text" name="duration_month" class="form-control" placeholder="Country" value="<?php echo htmlentities($row['duration_month']);    ?>">
-                      </div>
-                    </div>
-                   
+                  
                   </div>
-                  <div class="row">
-                    <div class="col-md-12">
+                 
+					
+					
+						 <div class="row">
+                
+                    <div class="col-md-6 px-1">
                       <div class="form-group">
-                        <label>Role And Responsiblities</label>
-                        <textarea rows="4" cols="80" name="role" class="form-control" placeholder="Write role and responsiblity in less than 250 words" value="Mike"><?php echo htmlentities($row['role']);    ?></textarea>
+                        <label>12th School Name</label>
+                        <input type="text" name="xii_name" class="form-control" placeholder="" value="<?php echo htmlentities($row['12_school']);    ?>">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Year of Complete</label>
+                        <input type="text" name="xii_completion" class="form-control" placeholder="" value="<?php echo htmlentities($row['12_year_complete']);    ?>">
                       </div>
                     </div>
                   </div>
 					
 					
-					   <div class="row">
+					 <div class="row">
+                
+                    <div class="col-md-6 px-1">
+                      <div class="form-group">
+                        <label>12th Board</label>
+                        <input type="text" name="xii_board" class="form-control" placeholder="" value="<?php echo htmlentities($row['12_board']);    ?>">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">12th Percentage</label>
+                        <input type="text" name="xii_percentage" class="form-control" placeholder="" value="<?php echo htmlentities($row['12_percentage']);    ?>">
+                      </div>
+                    </div>
+                  </div>
+					
+				
+					
+					
+              
+				  
+				  <!-- 12th end -->
+				  
+				  <!-- bachelor start -->
+				  	 <h4>Bachelor Degree</h4>
+				   <br>
+				
+                 
+						
+                <div class="row">
+                    <div class="col-md-5 pr-1">
+                      <div class="form-group">
+                        <label>Bachelor Course Type</label>
+                        <input type="text" name="be_stream" class="form-control"  placeholder="" value="<?php echo htmlentities($row['be_course']);    ?>">
+                      </div>
+                    </div>
+                  
+                  </div>
+                 
+					
+					
+						 <div class="row">
+                
+                    <div class="col-md-6 px-1">
+                      <div class="form-group">
+                        <label>Bachelor Collage Name</label>
+                        <input type="text" name="college_name" class="form-control" placeholder="" value="<?php echo htmlentities($row['be_school']);    ?>">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Year of Complete</label>
+                        <input type="text" name="be_completion" class="form-control" placeholder="" value="<?php echo htmlentities($row['be_year_complete']);    ?>">
+                      </div>
+                    </div>
+                  </div>
+					
+					
+					 <div class="row">
+                
+                    <div class="col-md-6 px-1">
+                      <div class="form-group">
+                        <label>Bachelor University</label>
+                        <input type="text" name="uni_name" class="form-control" placeholder="" value="<?php echo htmlentities($row['be_board']);    ?>">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Bachelor Percentage</label>
+                        <input type="text" name="be_percentage" class="form-control" placeholder="" value="<?php echo htmlentities($row['be_percentage']);    ?>">
+                      </div>
+                    </div>
+                  </div>
+					
+				
+					
+					
+          
+				  
+				    <!-- bachelor end -->
+				  
+				   <br>
+				  
+				    <!-- Post Graduation start -->
+				  
+				
+				  
+                  <h4>Post Graduation</h4>
+						
+                <div class="row">
+                    <div class="col-md-5 pr-1">
+                      <div class="form-group">
+                        <label>Post Graduation Course Type</label>
+                        <input type="text" name="me_stream" class="form-control"  placeholder="" value="<?php echo htmlentities($row['me_course']);    ?>">
+                      </div>
+                    </div>
+                  
+                  </div>
+                 
+					
+					
+						 <div class="row">
+                
+                    <div class="col-md-6 px-1">
+                      <div class="form-group">
+                        <label>Post Graduation Collage Name</label>
+                        <input type="text" name="me_name" class="form-control" placeholder="" value="<?php echo htmlentities($row['me_school']);    ?>">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Year of Complete</label>
+                        <input type="text" name="me_completion" class="form-control" placeholder="" value="<?php echo htmlentities($row['me_year_complete']);    ?>">
+                      </div>
+                    </div>
+                  </div>
+					
+					
+					 <div class="row">
+                
+                    <div class="col-md-6 px-1">
+                      <div class="form-group">
+                        <label>Post Graduation University</label>
+                        <input type="text" name="me_uni_name" class="form-control" placeholder="" value="<?php echo htmlentities($row['me_board']);    ?>">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Post Graduation Percentage</label>
+                        <input type="text" name="me_percentage" class="form-control" placeholder="" value="<?php echo htmlentities($row['me_percentage']);    ?>">
+                      </div>
+                    </div>
+                  </div>
+					
+					
+					 <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
                         
-                        <input name="submit" type="submit" value="Edit" >
+                        <input name="submit" type="submit" style="width:100px;margin:10px;height:35px; background-color:#ffb870;border-radius: 10px;" value="Update" >
                       </div>
                     </div>
                   </div>
 					
+				
+					
 					
                 </form>
+				  <!-- Post Graduation end -->
+				  
+				  
               </div>
             </div>
           </div>

@@ -16,6 +16,7 @@ include('config.php');
 if(isset($_POST['submit']))
 {
 	
+
 	
 	if($_POST['password']==$_POST['repass']){
 	
@@ -56,7 +57,9 @@ if(isset($_POST['submit']))
 				
 				
 				 echo "<script type='text/javascript'>alert('$msg');</script>";
-					header("Location: login.php");
+				
+				
+				//	header("Location: login.php");
 				
 				
 				
@@ -79,68 +82,21 @@ if(isset($_POST['submit']))
 			
 			
 			$msg="Account Already Exist. please Login";
+			
+			
 			echo "<script type='text/javascript'>alert('$msg');</script>";
 			
 			
-				header("Location: login.php");
+				//header("Location: login.php");
 			
 			
 		}
 	
 	
-	/*
-	$first_name=$_POST['first'];
-	$last=$_POST['last'];
-	$phone=$_POST['phone'];
-	$address=$_POST['address'];
-	$city=$_POST['city'];
-	$state=$_POST['state'];
-	$email=$_POST['email'];
-	$pin=$_POST['pin'];
-	//$personal=$_POST['personal'];
-	
-	
-	$personal="null";
 
-
-
-
-
-
-	$msg="error!!! Try Again...";
-	
-	
-	
-		//$ret=mysqli_query($con,"INSERT INTO `resume_detail`(`email`, `first_name`) VALUES ('$email','$first_name'  ) ");
-		
-	
-	  
-	
-	
-
-	
-if($ret=mysqli_query($con,"INSERT INTO `resume_detail`(`email`, `first_name`, `last_name`, `phoneno.`, `address`, `pincode`, `city`, `state`, `personal_profile`) VALUES ('$email','$first_name','$last','$phone','$address','$pin', '$city','$state','$personal'  ) ")){
-	
-	
-	$_SESSION['id']=$email;
-	
-	
-	header("Location: resume/personal.php");
-	
-	
-	
-}else{
-	
-	 echo "<script type='text/javascript'>alert('$msg');</script>";
-	
-	
-}
-		
-		*/
-	
 
 		
-		}else{
+		} else{
 		$msg="paswword does not match";
 	
 	
@@ -150,25 +106,11 @@ if($ret=mysqli_query($con,"INSERT INTO `resume_detail`(`email`, `first_name`, `l
 }
 		
 		
-}
-
-
-
-
-
-
+} 
 
 
 
 ?>
-
-
-
-
-
-
-
-
 
 
 
@@ -238,7 +180,9 @@ if($ret=mysqli_query($con,"INSERT INTO `resume_detail`(`email`, `first_name`, `l
                         <div class="form-submit">
                          
                             <input type="submit" value="Register" class="submit" name="submit" id="submit" />
+							<a href="login.php"> <h2 style="color:#ff6801">Login</h2></a>
                         </div>
+						
                     </form>
                 </div>
             </div>

@@ -32,12 +32,16 @@ header('location:registration/login.php');
 else{
 	
 	$user_email=$_SESSION['email'];
+	//$user_email="amit@gmail.com";
 
 
 
 
-$ret=mysqli_query($con,"select * from resume_work_exp where email= '$user_email' ");
-												$row=mysqli_fetch_array($ret);
+	$ret=mysqli_query($con,"select * from resume_work_exp where email= '$user_email' ");
+												//$row=mysqli_fetch_array($ret);
+	$num=mysqli_num_rows($ret);
+	
+	
 
 
 
@@ -46,6 +50,7 @@ $ret=mysqli_query($con,"select * from resume_work_exp where email= '$user_email'
 
 if(isset($_POST['submit']))
 {
+	$id=$_POST['id'];
 	$location=$_POST['company_location'];
 	$company_name=$_POST['company_name'];
 	$designation=$_POST['designation'];
@@ -74,22 +79,38 @@ if(isset($_POST['submit']))
 	
 
 	
-	if($ret=mysqli_query($con,"UPDATE `resume_work_exp` SET `email`='$user_email',`company_name`='$company_name',`duration_year`='$duration_year',`designation`='$designation',`role`='$role',`duration_month`='$duration_month',`company_location`='$location' WHERE email='$user_email' ")){
+	if($ret=mysqli_query($con,"UPDATE `resume_work_exp` SET `company_name`='$company_name',`duration_year`='$duration_year',`designation`='$designation',`role`='$role',`duration_month`='$duration_month',`company_location`='$location' WHERE id= '$id' AND email='$user_email'  ")){
 		
-		
-		
-		
-		
-		
-		
-		
-		
+		$mes="updated";
+		 echo "<script>alert('$mes');</script>"; 
+			header("Refresh:0");
 
 		
 	}
+	
+	
+	
 
 }
 
+	
+	
+	if(isset($_POST['delete']))
+{
+		$id=$_POST['id'];
+		$mes="Deleted";
+		
+	if($row=mysqli_query($con,"DELETE FROM `resume_work_exp` WHERE id= '$id'")){
+		
+		
+	 echo "<script>alert('$mes');</script>"; 
+			header("Refresh:0");
+		
+	}
+	
+	
+
+}
 
 }
 
@@ -195,7 +216,7 @@ if(isset($_POST['submit']))
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">User Profile</a>
+            <a class="navbar-brand" href="#pablo"><?php echo $_SESSION['email']; ?></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -214,8 +235,8 @@ if(isset($_POST['submit']))
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Change Password</a>
-                  <a class="dropdown-item" href="#">Logout</a>
+                  <a class="dropdown-item" href="change_pass.php">Change Password</a>
+                  <a class="dropdown-item" href="logout.php">Logout</a>
                 
                 </div>
               </li>
@@ -232,7 +253,7 @@ if(isset($_POST['submit']))
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Edit Profile</h5>
+                <h5 class="title">Work Experience</h5>
               </div>
               <div class="card-body">
 				  
@@ -241,12 +262,18 @@ if(isset($_POST['submit']))
 				 
 
 				  
+				  <?php
 				  
+				  while($row=mysqli_fetch_array($ret)){
+				  
+				  
+				  ?>
 				  
                 <form method="post">
                   <div class="row">
                     <div class="col-md-5 pr-1">
                       <div class="form-group">
+						  <input type="hidden" id="custId" name="id" value="<?php echo htmlentities($row['id']);?>">
                         <label>Company Name</label>
                         <input type="text" name="company_name" class="form-control"  placeholder="Company" value="<?php echo htmlentities($row['company_name']);    ?>">
                       </div>
@@ -308,16 +335,23 @@ if(isset($_POST['submit']))
 					
 					
 					   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                       <div class="form-group">
                         
-                        <input name="submit" type="submit" value="Edit" >
+                        <input style="width:100px;margin:10px;height:35px; background-color:#ffb870;border-radius: 10px;" name="submit" type="submit" value="Update" > <input  style="width:100px;margin:10px;height:35px; background-color:#ffb870;border-radius: 10px;" name="delete" type="submit" value="Delete" >
                       </div>
                     </div>
                   </div>
 					
 					
                 </form>
+				  
+				  
+				  <br>
+				  <hr>
+				  <br>
+				  <?php } ?>
+			<a  href="add.php">	  <button style="width:100px;margin:10px;height:35px; background-color:#1d3c60;border-radius: 10px;float:right;color: white;" class="active" name="add"><strong>+</strong> Add New</button></a>
               </div>
             </div>
           </div>

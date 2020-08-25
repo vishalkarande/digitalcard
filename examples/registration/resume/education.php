@@ -36,6 +36,9 @@ else{
 if(isset($_POST['submit']))
 {
 	
+	
+	
+	
 	$email=$_SESSION['email'];
 	/*$first_name=$_POST['first'];
 	$last=$_POST['last'];
@@ -93,35 +96,49 @@ $me_completion=$_POST['me_completion'];
 	
 
 	
-if($ret=mysqli_query($con,"INSERT INTO `resume_education`(`email`, `x_school`, `x_board`, `x_percentage`, `x_year_complete`, `12_stream`, `12_school`, `12_board`, `be_percentage`, `12_year_complete`, `be_course`, `be_school`, `be_board`, `be_percentage`, `be_year_complete`, `me_course`, `me_school`, `me_board`, `me_percentage`, `me_year_complete`) VALUES ('$email','$x_name','$x_board','$x_percentage','$x_completion','$xii_stream','$xii_name','$xii_board',$xii_percentage,'$xii_completion','$be_stream','$college_name','$uni_name','$be_percentage','$be_completion','$me_stream','$me_name','$me_uni_name','$me_percentage','$me_completion')")){
+if($ret=mysqli_query($con,"INSERT INTO `resume_education`(`email`, `x_school`, `x_board`, `x_percentage`, `x_year_complete`,`12_stream`, `12_school`, `12_board`, `12_percentage`, `12_year_complete`,`be_course`, `be_school`, `be_board`, `be_percentage`, `be_year_complete`,`me_course`, `me_school`, `me_board`, `me_percentage`, `me_year_complete`) VALUES ('$email','$x_name','$x_board','$x_percentage','$x_completion','$xii_stream','$xii_name','$xii_board','$xii_percentage','$xii_completion','$be_stream','$college_name','$uni_name','$be_percentage','$be_completion','$me_stream','$me_name','$me_uni_name','$me_percentage','$me_completion')")){
 	
 	
+	$msg="done";
 	
-	
+	 echo "<script type='text/javascript'>alert('$msg');</script>";
 	
 	header("Location: work.php");
 	
 	
 	
 }else{
+	$dummy=mysqli_query($con,"SELECT form FROM `students_user` WHERE email='$email' ");
+	$num=mysqli_num_rows($dummy);
+	
+	
+	if($num>0){
+		$msg="Data existed";
+		
+		 echo "<script type='text/javascript'>alert('$msg');</script>";
+		
+			header("Location: work.php");
+		
+	}
 	
 	 echo "<script type='text/javascript'>alert('$msg');</script>";
 	
 	
 }
+
+
+}
+		
 		
 		
 	
-
-}
+		
+		
+		
 		
 	}
 	
 }
-
-
-
-/*$ret=mysqli_query($con,"INSERT INTO `resume_education`(`email`, `x_school`, `x_board`, `x_percentage`, `x_year_complete`, `12_stream`, `12_school`, `12_board`, `12_percentage`, `12_year_complete`, `be_course`, `be_school`, `be_board`, `be_percentage`, `be_year_complete`, `me_course`, `me_school`, `me_board`, `me_percentage`, `me_year_complete`) VALUES ('$email','$x_board','$x_percentage','$x_completion','$xii_stream','$xii_name','$xii_board','$xii_percentage','$xii_completion','$be_stream','$college_name','$uni_name','$be_percentage','$be_completion','$me_stream','$me_name','$me_uni_name','$me_percentage','$me_completion') ")*/
 
 
 
@@ -322,7 +339,7 @@ if($ret=mysqli_query($con,"INSERT INTO `resume_education`(`email`, `x_school`, `
 						
 						
 						<div class="form-row">
-                            <div class="name" >Write NA if dont have master degree</div>
+                            <div class="name" >if dont have master degree dont fill it</div>
 								
 								
                           

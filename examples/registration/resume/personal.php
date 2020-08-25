@@ -69,7 +69,7 @@ if($ret=mysqli_query($con,"UPDATE `resume_detail` SET `personal_profile`='$perso
 	
 	
 	
-	header("Location: work.php");
+	header("Location: education.php");
 	
 	
 	
@@ -121,7 +121,7 @@ if($ret=mysqli_query($con,"UPDATE `resume_detail` SET `personal_profile`='$perso
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Apply for job by Colorlib</title>
+    <title>Register</title>
 
     <!-- Font special for pages-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">

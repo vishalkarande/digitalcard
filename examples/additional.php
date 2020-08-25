@@ -38,7 +38,7 @@ else{
 
 
 $ret=mysqli_query($con,"select * from resume_additional where email= '$user_email' ");
-												$row=mysqli_fetch_array($ret);
+												//$row=mysqli_fetch_array($ret);
 
 
 
@@ -47,23 +47,10 @@ $ret=mysqli_query($con,"select * from resume_additional where email= '$user_emai
 
 if(isset($_POST['submit']))
 {
-	/*$first_name=$_POST['first'];
-	$last=$_POST['last'];
-	$phone=$_POST['phone'];
-	$address=$_POST['address'];
-	$city=$_POST['city'];
-	$state=$_POST['state'];
-	//$productdescription=$_POST[''];
-	$pin=$_POST['pin'];
-	$personal=$_POST['personal'];*/
-	
-	
 	
 
 
-
-
-
+	$id=$_POST['id'];
 
 	$skill=$_POST['skill'];
 	
@@ -73,14 +60,32 @@ if(isset($_POST['submit']))
 	
 
 	
-	if($ret=mysqli_query($con,"UPDATE resume_additional SET `adittional`='$skill'  WHERE email='$user_email' ")){
+	if($ret=mysqli_query($con,"UPDATE resume_additional SET `adittional`='$skill'  WHERE email='$user_email' AND id= '$id' ")){
 		
 		
-		
-		 echo "<script type='text/javascript'>alert('$pin');</script>";
-		
+		$mes="Updated";
+		 echo "<script type='text/javascript'>alert('$mes');</script>";
+		header("Refresh:0");
 		
 	}
+
+}
+	
+	
+	if(isset($_POST['delete']))
+{
+		$id=$_POST['id'];
+		$mes="Deleted";
+		
+	if($row=mysqli_query($con,"DELETE FROM `resume_additional` WHERE id= '$id'")){
+		
+		
+	 echo "<script>alert('$mes');</script>"; 
+		header("Refresh:0");
+		
+	}
+	
+	
 
 }
 
@@ -190,7 +195,7 @@ if(isset($_POST['submit']))
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">User Profile</a>
+            <a class="navbar-brand" href="#pablo"><?php echo $_SESSION['email']; ?></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -209,7 +214,7 @@ if(isset($_POST['submit']))
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Change Password</a>
+                  <a class="dropdown-item" href="change_pass.php">Change Password</a>
                   <a class="dropdown-item" href="logout.php">Change Password</a>
                  
                 </div>
@@ -227,12 +232,18 @@ if(isset($_POST['submit']))
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Edit Profile</h5>
+                <h5 class="title">Additional Details</h5>
               </div>
               <div class="card-body">
 				  
 				  
 				  
+				  <?php
+				  
+				  while($row=mysqli_fetch_array($ret)){
+				  
+				  
+				  ?>
 				  
 				  
                 <form method="post">
@@ -240,6 +251,7 @@ if(isset($_POST['submit']))
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
+						  <input type="hidden" id="custId" name="id" value="<?php echo htmlentities($row['id']);?>">
                        <h3><label>Additional Details and Achivements</label></h3> 
                         <textarea style="height:500px;font-size:15px" rows="4" cols="150" name="skill" class="form-control" placeholder="Write Your Additional Details and achivements in less than 1000 words" ><?php echo htmlentities($row['adittional']);    ?></textarea>
                       </div>
@@ -248,16 +260,25 @@ if(isset($_POST['submit']))
 					
 					
 					   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                       <div class="form-group">
                         
-                        <input name="submit" type="submit" value="Edit" >
+                        <input name="submit" type="submit" value="Update"  style="width:100px;margin:10px;height:35px; background-color:#ffb870;border-radius: 10px;" > <input name="delete" type="submit" value="Delete"   style="width:100px;margin:10px;height:35px; background-color:#ffb870;border-radius: 10px;">
                       </div>
                     </div>
                   </div>
 					
 					
                 </form>
+				  
+				  
+				  <?php
+				  
+				  }
+				  
+				  
+				  ?>
+				  <a  href="add_additional.php">	  <button class="active" name="add" style="width:100px;margin:10px;height:35px; background-color:#1d3c60;border-radius: 10px;float:right;color: white;">Add New</button></a>
               </div>
             </div>
           </div>
